@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 
@@ -152,8 +153,64 @@ public void deleteRecord(String sql, Object... values) {
     }
 }
 
+    public String login(String email, String pass) {
+        String role = null; // store role if login successful
+        String sql = "SELECT u_role, u_status FROM tbl_user WHERE u_email = ? AND u_pass = ?";
+        
+        try (Connection conn = this.connectDB();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setString(1, email);
+            pstmt.setString(2, pass);
+            
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    String status = rs.getString("u_status");
+                    if ("Approve".equalsIgnoreCase(status)) {
+                        role = rs.getString("u_role");
+                        System.out.println("Login successful! Role: " + role);
+                    } else {
+                        System.out.println("Your account is still pending. Please wait for admin approval.");
+                        return null;
+                    }
+                } else {
+                    System.out.println("Invalid username or password.");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Login error: " + e.getMessage());
+        }
+        
+        return role; 
+    }
     
-    
-    
+    public java.util.List<java.util.Map<String, Object>> fetchRecords(String sqlQuery, Object... values) {
+    java.util.List<java.util.Map<String, Object>> records = new java.util.ArrayList<>();
+
+    try (Connection conn = this.connectDB();
+         PreparedStatement pstmt = conn.prepareStatement(sqlQuery)) {
+
+        for (int i = 0; i < values.length; i++) {
+            pstmt.setObject(i + 1, values[i]);
+        }
+
+        ResultSet rs = pstmt.executeQuery();
+        ResultSetMetaData metaData = rs.getMetaData();
+        int columnCount = metaData.getColumnCount();
+
+        while (rs.next()) {
+            java.util.Map<String, Object> row = new java.util.HashMap<>();
+            for (int i = 1; i <= columnCount; i++) {
+                row.put(metaData.getColumnName(i), rs.getObject(i));
+            }
+            records.add(row);
+        }
+
+    } catch (SQLException e) {
+        System.out.println("Error fetching records: " + e.getMessage());
+    }
+
+    return records;
+}
     
 }
