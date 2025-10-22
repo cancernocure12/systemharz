@@ -3,23 +3,21 @@ package dashboard;
 
  import main.main;
  import config.config;
+import static main.main.inp;
 
 
-public class dashboard {
+public class manageuser {
     
     public void addUser(){
-    
-        System.out.println("\nAdd User");
-        
+        System.out.println("\n=====================");
+        System.out.println("=== Add User ===");
+         System.out.println("=====================");
         System.out.println("Add user Name: ");
         String name = main.inp.nextLine();
-        
         System.out.println("Enter Email: ");
         String email = main.inp.nextLine();
-        
         System.out.println("Enter Password : ");
         String pass = main.inp.nextLine();
-    
         System.out.println("Choose Role (1. Admin, 2. User): ");
         int chooseRole = main.inp.nextInt();
         
@@ -91,4 +89,58 @@ public class dashboard {
     
     }
     
-}
+ public void manageuser (int uid){
+     
+        String response;
+        do{
+            System.out.println("\n\n====================================");
+            System.out.println("=========| MANAGE USER |========");
+            System.out.println("====================================");
+          
+            System.out.println("1. Add User: ");
+            System.out.println("2. View User: ");
+            System.out.println("3. Update User: ");
+            System.out.println("4. Delete User: ");
+
+            System.out.println("\nChoose an Option: ");
+            int option = inp.nextInt();
+            inp.nextLine();
+        manageuser cd = new manageuser();
+            switch(option){
+                
+                case 1:
+                    cd.addUser();
+                    break;
+                case 2:
+                    cd.viewUser();
+                    break;  
+                    
+                 case 3:
+                    cd.viewUser();
+                    cd.updateUser();
+                    break;    
+                    
+                 case 4:
+                    cd.viewUser();
+                    cd.deleteUser();
+                    break;    
+                 
+                default: System.out.println("\nInvalid input, Try Again.");
+                
+            }
+            System.out.print("\nDo you want to continue (yes / no): ");
+            response = main.inp.next();
+        }while(response.equals("yes") || response.equals("1"));
+            main.adminDashboard(uid);
+            
+            
+        }
+
+    public void managehazard(int uid) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+     
+ }   
+    
+    
+

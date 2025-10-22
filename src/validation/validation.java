@@ -9,7 +9,7 @@ public class validation {
     public void register(){
         config con = new config();
         
-        System.out.println("Add user name: ");
+        System.out.println("Add User name: ");
         String name = main.inp.nextLine();
         while(true){
             String qry = "SELECT * FROM tbl_user WHERE u_name = ?";
@@ -23,10 +23,10 @@ public class validation {
             }
         }
         main.inp.nextLine();
-        System.out.println("Enter user email: ");
+        System.out.println("Enter User Email: ");
         String email = main.inp.nextLine();
         
-        System.out.println("Enter password: ");
+        System.out.println("Enter Password: ");
         String pass = main.inp.nextLine();
         System.out.println("Choose role (1. Admin, 2. User): ");
         int chooseRole = main.inp.nextInt();
@@ -46,7 +46,7 @@ public class validation {
 
 public void login(){
 
-    System.out.println("Enter email: ");
+    System.out.println("Enter Email: ");
     String email = main.inp.nextLine();
     System.out.println("Enter Password: ");
     String pass = main.inp.nextLine();
@@ -56,9 +56,12 @@ public void login(){
     
     if(role != null){
         if (role.equalsIgnoreCase("Admin")){
-            main.loginDashboard();
-        }else{
-            System.out.println("Invalid");
+            main.adminDashboard(0);
+        }else if (role.equalsIgnoreCase("User")){
+            main.userDashboard();
+        }else {
+            System.out.println("Invalid role assigned");
+            
         }
     }
 
