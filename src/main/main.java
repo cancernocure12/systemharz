@@ -61,10 +61,10 @@ public class main {
             System.out.println("=========| ADMIN DASHBOARD |========");
             System.out.println("====================================");
           
-            System.out.println("1. Manage User: ");
-            System.out.println("2. Manage Hazard: ");
-            System.out.println("3. Manage Records: ");
-            System.out.println("4. Exit: ");
+            System.out.println("1. Manage User    ");
+            System.out.println("2. Manage Hazard  ");
+            System.out.println("3. Manage Records ");
+            System.out.println("4. Exit ");
 
             System.out.println("\nChoose an Option: ");
             int option = inp.nextInt();
@@ -107,10 +107,10 @@ public class main {
            System.out.println("====================================");
         
            
-            System.out.println("1. Add Hazard : ");
-            System.out.println("2. View Hazard : ");
-            System.out.println("3. View Records : ");
-            System.out.println("4. Exit : ");
+            System.out.println("1. Add Hazard    ");
+            System.out.println("2. View Hazard   ");
+            System.out.println("3. View Records  ");
+            System.out.println("4. Exit  ");
             
         
             System.out.print("\nChoose an option: ");

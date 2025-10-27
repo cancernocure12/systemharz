@@ -97,11 +97,11 @@ public class manageuser {
             System.out.println("=========| MANAGE USER |========");
             System.out.println("====================================");
           
-            System.out.println("1. Add User: ");
-            System.out.println("2. View User: ");
-            System.out.println("3. Update User: ");
-            System.out.println("4. Delete User: ");
-
+            System.out.println("1. Add User    ");
+            System.out.println("2. View User   ");
+            System.out.println("3. Update User ");
+            System.out.println("4. Delete User ");
+            System.out.println("5. Exit: ");
             System.out.println("\nChoose an Option: ");
             int option = inp.nextInt();
             inp.nextLine();
@@ -124,6 +124,8 @@ public class manageuser {
                     cd.viewUser();
                     cd.deleteUser();
                     break;    
+                 case 5:
+                     main.adminDashboard(uid);
                  
                 default: System.out.println("\nInvalid input, Try Again.");
                 
@@ -136,10 +138,7 @@ public class manageuser {
             
         }
 
-    public void managehazard(int uid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-     
+   
  }   
     
     

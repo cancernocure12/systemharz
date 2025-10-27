@@ -16,11 +16,11 @@ public class managehazard {
            System.out.println("\n\n====================================");
             System.out.println("=========| MANAGE HAZARD |========");
             System.out.println("====================================");
-            System.out.println("1. Add Hazard: ");
-            System.out.println("2. View Hazard: ");
-            System.out.println("3. Update Hazard: ");
-            System.out.println("4. Delete Hazard: ");
-            System.out.println("5. Exit: ");
+            System.out.println("1. Add Hazard    ");
+            System.out.println("2. View Hazard   ");
+            System.out.println("3. Update Hazard ");
+            System.out.println("4. Delete Hazard ");
+            System.out.println("5. Exit ");
 
             System.out.print("\nChoose an option: ");
             int option = main.inp.nextInt();

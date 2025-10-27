@@ -39,9 +39,10 @@ public class validation {
             
         }
         
+        String hash = con.hashPassword(pass);
         
         String sql = "INSERT INTO tbl_user(u_name, u_email, u_pass, u_role, u_status) VALUES(?, ?, ?, ?, ?)";
-        con.addRecord(sql, name, email, pass, role, "Pending");
+        con.addRecord(sql, name, email, hash, role, "Pending");
     }
 
 public void login(){
