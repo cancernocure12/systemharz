@@ -78,13 +78,38 @@ public class manageuser {
     }
     
     public void approveUser(){
-    
-        System.out.println("Enter id to approve: ");
-        int id = main.inp.nextInt();
+        
         
         config con = new config();
-        String sqlUpdate = "Update tbl_user SET c_status = ?, WHERE c_id = ?";
-        con.updateRecord(sqlUpdate, "Approve" , id );
+        System.out.print("Enter ID to Approve User: ");
+        int aid = main.inp.nextInt();
+        main.inp.nextLine();
+        
+        String fetchQuery = "SELECT u_name, u_email, u_status FROM tbl_user WHERE u_id = ?";
+        java.util.List<java.util.Map<String, Object>> result = con.fetchRecords(fetchQuery, aid);
+
+        if (result.isEmpty()) {
+            System.out.println("User not found!");
+            return;
+        }
+
+        String fullname = (String) result.get(0).get("u_name");
+        String email = (String) result.get(0).get("u_email");
+        String currentStatus = (String) result.get(0).get("u_status");
+
+        if ("Approved".equalsIgnoreCase(currentStatus)) {
+            System.out.println("User is already approved.");
+            return;
+        }
+
+        String sqlUpdate = "UPDATE tbl_user SET u_status = ? WHERE u_id = ?";
+        con.updateRecord(sqlUpdate, "Approved", aid);
+
+        System.out.println("\nUser approved successfully!");
+        
+        
+        
+        
     
     
     }
@@ -97,11 +122,12 @@ public class manageuser {
             System.out.println("=========| MANAGE USER |========");
             System.out.println("====================================");
           
-            System.out.println("1. Add User    ");
-            System.out.println("2. View User   ");
-            System.out.println("3. Update User ");
-            System.out.println("4. Delete User ");
-            System.out.println("5. Exit: ");
+            System.out.println("1. Approve User    ");
+            System.out.println("2. Add User    ");
+            System.out.println("3. View User");
+            System.out.println("4. Update User ");
+            System.out.println("5. Delete User: ");
+            System.out.println("6. Exit: ");
             System.out.println("\nChoose an Option: ");
             int option = inp.nextInt();
             inp.nextLine();
@@ -109,24 +135,29 @@ public class manageuser {
             switch(option){
                 
                 case 1:
-                    cd.addUser();
+                    cd.viewUser();
+                    cd.approveUser();
                     break;
                 case 2:
-                    cd.viewUser();
+                    cd.addUser();
                     break;  
                     
                  case 3:
                     cd.viewUser();
-                    cd.updateUser();
+                   
                     break;    
                     
                  case 4:
                     cd.viewUser();
-                    cd.deleteUser();
+                    cd.updateUser();
                     break;    
                  case 5:
+                     cd.viewUser();
+                     cd.deleteUser();
+                 case 6:
                      main.adminDashboard(uid);
-                 
+                       
+                 break;   
                 default: System.out.println("\nInvalid input, Try Again.");
                 
             }

@@ -168,7 +168,7 @@ public void deleteRecord(String sql, Object... values) {
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     String status = rs.getString("u_status");
-                    if ("Approve".equalsIgnoreCase(status)) {
+                    if ("Approved".equalsIgnoreCase(status)) {
                         role = rs.getString("u_role");
                         System.out.println("Login successful! Role: " + role);
                     } else {
